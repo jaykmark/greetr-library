@@ -3,7 +3,7 @@
     return new Greetr.init(firstName, lastName, language)
   }
 
-  // Closures allow new instances of Greetr to have access to these abstracted properties
+  // Closures allow new instances of Greetr to have access to these abstracted properties.
   const supportedLangs = ['en', 'es', 'chirp', 'newspeak']
 
   const greetings = {
@@ -42,13 +42,26 @@
 
     formalGreeting: function () {
       return formalGreetings[this.language] + ' ' + this.firstName + '!';
+    },
+
+    log: function () {
+      if (console) { // Checks if console exists. eg - Internet Explorer doesn't have console variable unless it is open.
+        console.log(logMessages[this.language]);
+      }
+      return this; // Returning this (the instantiated object) allows method chaining.
+    },
+
+    setLang: function (lang) {
+      this.language = lang;
+      this.validateLanguage();
+      return this;
     }
   };
 
   Greetr.init = function (firstName, lastName, language) {
     this.firstName = firstName || 'Dwight';
     this.lastName = lastName || 'Schrute';
-    this.language = language || 'Love';
+    this.language = language || 'chirp';
   }
 
   // Assign the prototype to our named prototype
